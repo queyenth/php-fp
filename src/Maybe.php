@@ -26,4 +26,5 @@ abstract class Maybe extends Monad {
     abstract public function maybe($default, callable $f);
     abstract public function isJust(): bool;
     abstract public function isNothing(): bool;
+    abstract public function fromJust();
 }

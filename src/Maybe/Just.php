@@ -25,4 +25,8 @@ final class Just extends Maybe {
     public function isNothing(): bool {
         return false;
     }
+
+    public function fromJust() {
+        return $this->extract();
+    }
 }

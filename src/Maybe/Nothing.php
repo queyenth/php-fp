@@ -26,4 +26,8 @@ final class Nothing extends Maybe {
     public function isNothing(): bool {
         return true;
     }
+
+    public function fromJust() {
+        throw new \Exception("You cannot do fromJust on Nothing!");
+    }
 }
