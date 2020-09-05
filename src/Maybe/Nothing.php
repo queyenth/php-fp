@@ -18,4 +18,12 @@ final class Nothing extends Maybe {
     public function maybe($default, callable $f) {
         return $default;
     }
+
+    public function isJust(): bool {
+        return false;
+    }
+
+    public function isNothing(): bool {
+        return true;
+    }
 }

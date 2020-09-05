@@ -17,4 +17,12 @@ final class Just extends Maybe {
     public function maybe($default, callable $f) {
         return $f($this->extract());
     }
+
+    public function isJust(): bool {
+        return true;
+    }
+
+    public function isNothing(): bool {
+        return false;
+    }
 }
