@@ -6,7 +6,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Q\\Monad\\": "src/"
-        }
+            "Q\\FP\\": "src/"
+        },
+        "files": ["src/functions.php"]
     }
 }

@@ -1,18 +1,22 @@
 <?php
 declare(strict_types=1);
 
-namespace Q\Monad\Maybe;
+namespace Q\FP\Monad\Maybe;
 
-use Q\Monad\Maybe;
-use Q\Monad\Monad;
+use Q\FP\Functor;
+use Q\FP\Monad;
+use Q\FP\Monad\Maybe;
+use Q\FP\Monad\Traits\Chain;
 
-final class Nothing extends Maybe {
+final class Nothing implements Maybe {
+    use Chain;
+
     public function bind(callable $f): Monad {
         return $this;
     }
 
-    public function extract() {
-        return null;
+    public function fmap(callable $f): Functor {
+        return $this;
     }
 
     public function maybe($default, callable $f) {
