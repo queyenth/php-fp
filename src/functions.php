@@ -11,7 +11,7 @@ function id ($x) {
 
 // Not recursive clean stuff
 function map(callable $f, ...$args) : callable {
-    return call_user_func_array('Q\\FP\\curry', ['array_map', $f, ...$args]);
+    return curry('array_map', ...[$f, ...$args]);
 }
 
 function curry(callable $f, ...$args) : callable {
