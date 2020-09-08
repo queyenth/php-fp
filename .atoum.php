@@ -28,13 +28,32 @@ $report->addField(new atoum\report\fields\runner\result\logo());
 CODE COVERAGE SETUP
  */
 // Please replace in next line "Project Name" by your project name and "/path/to/destination/directory" by your destination directory path for html files.
-$coverageField = new atoum\report\fields\runner\coverage\html('Project Name', 'html');
+if ($coverallToken = getenv('COVERALL_REPO_TOKEN')) {
+    $coveralls = new \mageekguy\atoum\reports\asynchronous\coveralls('src', $coverallToken);
 
-// Please replace in next line http://url/of/web/site by the root url of your code coverage web site.
-$coverageField->setRootUrl('');
+    $defaultFinder = $coveralls->getBranchFinder();
+    $coveralls
+        ->setBranchFinder(function () use ($defaultFinder) {
+            if (($branch = getenv('TRAVIS_BRANCH')) === false) {
+                $branch = $defaultFinder();
+            }
 
-$report->addField($coverageField);
+            return $branch;
+        })
+        ->setServiceName(getenv('TRAVIS') ? 'travis-ci' : null)
+        ->setServiceJobId(getenv('TRAVIS_JOB_ID') ?: null)
+        ->addDefaultWriter();
 
+    $runner->addReport($coveralls);
+}
+else {
+    $coverageField = new atoum\report\fields\runner\coverage\html('Project Name', 'html');
+
+    // Please replace in next line http://url/of/web/site by the root url of your code coverage web site.
+    $coverageField->setRootUrl('');
+
+    $report->addField($coverageField);
+}
 /*
 TEST EXECUTION SETUP
  */
