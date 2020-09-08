@@ -3,13 +3,14 @@ declare(strict_types=1);
 
 namespace Q\FP\Monad;
 
+use ArrayAccess;
 use Iterator;
 use Q\FP\Monad;
 use Q\FP\Functor;
 
 use function Q\FP\map;
 
-final class ListMonad implements Monad, Functor, Iterator {
+final class ListMonad implements Monad, Functor, Iterator, ArrayAccess {
     private array $value;
     private int $position = 0;
 
@@ -34,7 +35,23 @@ final class ListMonad implements Monad, Functor, Iterator {
     }
 
     public function valid(): bool {
-        return array_key_exists($this->position, $this->value);
+        return $this->offsetExists($this->position);
+    }
+
+    public function offsetExists($offset) {
+        return array_key_exists($offset, $this->value);
+    }
+
+    public function offsetGet($offset) {
+        return $this->value[$offset] ?? null;
+    }
+
+    public function offsetSet($offset, $value) {
+        throw new \Exception("You cannot change any value here, sorry");
+    }
+
+    public function offsetUnset($offset) {
+        throw new \Exception("You cannot change any value here, sorry");
     }
 
     // bind is Monad a -> (a -> Monad b) -> Monad b
@@ -48,6 +65,10 @@ final class ListMonad implements Monad, Functor, Iterator {
         }
 
         return new self($newVal);
+    }
+
+    public function extract() {
+        return $this->value;
     }
 
     // fmap is Functor a -> (a -> b) -> Functor b
