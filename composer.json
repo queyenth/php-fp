@@ -1,5 +1,5 @@
 {
-    "name": "queyenth/php-monad",
+    "name": "queyenth/php-fp",
     "version": "1.0.0",
     "require": {
         "php": "^7.4"
@@ -9,5 +9,8 @@
             "Q\\FP\\": "src/"
         },
         "files": ["src/functions.php"]
+    },
+    "require-dev": {
+        "atoum/atoum": "^3.4"
     }
 }
