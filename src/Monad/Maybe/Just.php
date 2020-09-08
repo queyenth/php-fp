@@ -26,7 +26,7 @@ final class Just implements Maybe {
     }
 
     public function maybe($default, callable $f) {
-        return $this->bind($f);
+        return $f($this->value);
     }
 
     public function isJust(): bool {
