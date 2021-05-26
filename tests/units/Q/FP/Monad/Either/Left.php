@@ -79,7 +79,7 @@ class Left extends atoum {
             }
 
             public function setA(int $a) {
-                $this->a = 10;
+                $this->a = $a;
                 return $this;
             }
         };
@@ -87,12 +87,13 @@ class Left extends atoum {
         $this
             ->given($this->newTestedInstance($classForTest))
             ->then
-            ->integer($this->testedInstance->bind(fn ($x) => $this->newTestedInstance($x->setA(10)))->getA()->fromLeft('something')->getA())
-            ->isEqualTo(5);
+            ->object($this->testedInstance->bind(fn ($x) => $this->newTestedInstance($x->setA(10)))->getA())
+            ->isInstanceOfTestedClass();
 
         $this
             ->given($this->newTestedInstance($classForTest))
             ->then
-            ->object($this->testedInstance->bind(fn ($x) => $this->newTestedInstance($x->setA(10)))->getB()->fromLeft('something'));
+            ->object($this->testedInstance->bind(fn ($x) => $this->newTestedInstance($x->setA(10)))->getB())
+            ->isInstanceOfTestedClass();
     }
 }

@@ -74,7 +74,7 @@ class Just extends atoum {
             ->then
             ->exception(
                 function () {
-                    $this->testedInstance->getB()->fromJust();
+                    $this->testedInstance->getB();
                 }
             );
     }
