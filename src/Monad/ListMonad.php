@@ -73,6 +73,6 @@ final class ListMonad implements Monad, Functor, Iterator, ArrayAccess {
 
     // fmap is Functor a -> (a -> b) -> Functor b
     public function fmap(callable $f): Functor {
-        return new self(map($f)($this->value)());
+        return new self(array_map($f, $this->value));
     }
 }
