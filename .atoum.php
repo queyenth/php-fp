@@ -29,7 +29,7 @@ CODE COVERAGE SETUP
  */
 // Please replace in next line "Project Name" by your project name and "/path/to/destination/directory" by your destination directory path for html files.
 if ($coverallToken = getenv('COVERALL_REPO_TOKEN')) {
-    $coveralls = new \mageekguy\atoum\reports\asynchronous\coveralls('src', $coverallToken);
+    $coveralls = new \atoum\atoum\reports\asynchronous\coveralls('src', $coverallToken);
 
     $defaultFinder = $coveralls->getBranchFinder();
     $coveralls
@@ -47,7 +47,7 @@ if ($coverallToken = getenv('COVERALL_REPO_TOKEN')) {
     $runner->addReport($coveralls);
 }
 else {
-    $coverageField = new atoum\report\fields\runner\coverage\html('Project Name', 'html');
+    $coverageField = new \atoum\atoum\report\fields\runner\coverage\html('Project Name', 'html');
 
     // Please replace in next line http://url/of/web/site by the root url of your code coverage web site.
     $coverageField->setRootUrl('');
