@@ -11,11 +11,11 @@ use Q\FP\Monad\Traits\Chain;
 final class Nothing implements Maybe {
     use Chain;
 
-    public function bind(callable $f): Monad {
+    public function bind(callable $f): Nothing {
         return $this;
     }
 
-    public function fmap(callable $f): Functor {
+    public function fmap(callable $f): Nothing {
         return $this;
     }
 

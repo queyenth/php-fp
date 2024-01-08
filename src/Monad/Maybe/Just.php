@@ -17,11 +17,11 @@ final class Just implements Maybe {
         $this->value = $value;
     }
 
-    public function bind(callable $f): Monad {
+    public function bind(callable $f): Maybe {
         return $f($this->value);
     }
 
-    public function fmap(callable $f): Functor {
+    public function fmap(callable $f): Maybe {
         return new self($f($this->value));
     }
 
